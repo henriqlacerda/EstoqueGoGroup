@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap");
+
+:root {
+  --ink: #17241f;
+  --muted: #78847f;
+  --line: #e9eeeb;
+  --green: #277b58;
+  --green-dark: #1e6748;
+  --green-soft: #edf6f0;
+  --canvas: #f8faf8;
+}
+
+* { box-sizing: border-box; }
+
+html { min-height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: "DM Sans", Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+.page-shell { min-height: 100vh; }
+
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+  padding: 28px 18px 20px;
+  border-right: 1px solid var(--line);
+  background: #fff;
+}
+
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 8px; font-family: "Manrope", sans-serif; font-size: 17px; font-weight: 800; letter-spacing: -0.7px; }
+.brand-mark { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 9px; background: var(--green); color: #fff; font-size: 16px; }
+.brand-light { color: var(--green); }
+.nav-caption { margin: 47px 9px 12px; color: #9aa49f; font-size: 10px; font-weight: 700; letter-spacing: 1.1px; }
+.nav-link { display: flex; align-items: center; gap: 12px; margin: 3px 0; padding: 11px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+.nav-link > span { width: 16px; text-align: center; font-size: 16px; }
+.nav-link-active { background: var(--green-soft); color: var(--green-dark); }
+.nav-link-muted { color: #697670; }
+.nav-link-muted:hover { background: #f5f7f5; color: var(--ink); }
+.sidebar-bottom { display: flex; align-items: center; gap: 9px; margin-top: auto; padding: 13px 9px 5px; color: #8a9690; font-size: 11px; }
+.status-dot, .workspace-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: #4cae7b; }
+
+.main-area { min-height: 100vh; margin-left: 250px; }
+.topbar { display: flex; height: 68px; align-items: center; justify-content: space-between; padding: 0 46px; border-bottom: 1px solid var(--line); background: #fff; }
+.breadcrumb { color: #6f7b75; font-size: 12px; }
+.breadcrumb span { padding: 0 8px; color: #c1c9c4; }
+.workspace-pill { display: flex; align-items: center; gap: 8px; padding: 8px 11px; border: 1px solid var(--line); border-radius: 7px; background: #fff; color: #68746e; font-size: 11px; }
+.workspace-dot { width: 6px; height: 6px; }
+.content { max-width: 1200px; margin: 0 auto; padding: 48px 46px 24px; }
+.welcome-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
+.eyebrow { margin: 0 0 8px; color: var(--green); font-size: 10px; font-weight: 700; letter-spacing: 1.35px; }
+h1, h2 { margin: 0; font-family: "Manrope", sans-serif; letter-spacing: -1.2px; }
+h1 { font-size: 30px; font-weight: 700; }
+.subtitle { margin: 8px 0 0; color: var(--muted); font-size: 13px; }
+.primary-button, .secondary-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 7px; font-size: 12px; font-weight: 600; transition: background .15s ease, transform .15s ease; }
+.primary-button { min-height: 39px; padding: 0 14px; background: var(--green); color: #fff; }
+.primary-button:hover { transform: translateY(-1px); background: var(--green-dark); }
+.primary-button span, .secondary-button span { font-size: 17px; line-height: 1; }
+.metrics-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.metric-card { min-height: 148px; padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.metric-heading { display: flex; align-items: center; justify-content: space-between; color: #6e7a74; font-size: 11px; font-weight: 500; }
+.metric-icon { display: grid; width: 28px; height: 28px; place-items: center; border-radius: 8px; background: var(--green-soft); color: var(--green); font-size: 15px; }
+.metric-card strong { display: block; margin-top: 13px; font-family: "Manrope", sans-serif; font-size: 25px; font-weight: 700; letter-spacing: -1px; }
+.metric-card p { margin: 6px 0 0; color: #9aa39e; font-size: 10px; line-height: 1.5; }
+.empty-card { display: flex; min-height: 330px; flex-direction: column; align-items: center; justify-content: center; margin-top: 18px; padding: 34px 20px; border: 1px dashed #dce6df; border-radius: 10px; background: #fff; text-align: center; }
+.empty-illustration { position: relative; width: 78px; height: 64px; margin-bottom: 17px; }
+.box { position: absolute; display: block; width: 39px; height: 37px; border: 1px solid #b8d7c4; background: #edf6f0; transform: skewY(-28deg) rotate(28deg); }
+.box-back { top: 8px; left: 12px; opacity: .7; }
+.box-front { top: 18px; left: 29px; border-color: #77b490; background: #d9eee0; }
+.sparkle { position: absolute; top: 1px; right: 2px; color: #e2b963; font-size: 14px; }
+.empty-card h2 { max-width: 450px; font-size: 19px; font-weight: 700; letter-spacing: -.55px; }
+.empty-copy { max-width: 390px; margin: 9px 0 18px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.secondary-button { min-height: 36px; padding: 0 12px; border: 1px solid #dce6df; background: #fff; color: #34463d; }
+.secondary-button:hover { background: var(--green-soft); }
+.footer { padding-top: 22px; color: #a0aaa4; font-size: 10px; text-align: center; }
+.footer span { padding: 0 5px; }
+
+@media (max-width: 900px) {
+  .sidebar { width: 210px; }
+  .main-area { margin-left: 210px; }
+  .topbar { padding: 0 28px; }
+  .content { padding: 40px 28px 22px; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .metric-card { min-height: 120px; }
+}
+
+@media (max-width: 620px) {
+  .sidebar { position: static; width: 100%; height: auto; padding: 15px 17px 12px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav-caption, .sidebar-bottom { display: none; }
+  .sidebar nav { display: flex; gap: 4px; margin-top: 13px; overflow-x: auto; }
+  .nav-link { flex: 0 0 auto; margin: 0; padding: 8px 10px; font-size: 11px; }
+  .nav-link > span { font-size: 14px; }
+  .main-area { margin-left: 0; }
+  .topbar { height: 52px; padding: 0 18px; }
+  .workspace-pill { padding: 6px 8px; font-size: 10px; }
+  .content { padding: 31px 18px 20px; }
+  .welcome-row { align-items: flex-start; flex-direction: column; gap: 16px; }
+  h1 { font-size: 27px; }
+  .metrics-grid { gap: 10px; }
+  .metric-card { min-height: 112px; }
+  .empty-card { min-height: 300px; margin-top: 12px; }
+}
