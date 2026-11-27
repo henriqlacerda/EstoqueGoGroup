@@ -6,3 +6,5 @@ node_modules/
 *.csv
 *.zip
 dados/
+
+tsconfig.tsbuildinfo
