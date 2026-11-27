@@ -275,7 +275,8 @@ const priorityTop10 = data.skus.map((sku) => {
   return { sku: sku.sku, score, baseMean: stats.baseMean, realizedPrice: stats.realizedPrice,
     unitCost: sku.unitCost, orders1970: orders1970.map((order) => ({ date: order.date, arrivalDate: order.arrivalDate, units: order.units, cost: order.cost })) };
 }).filter((row) => row.score > 0).sort((a, b) => b.score - a.score || a.sku.localeCompare(b.sku)).slice(0, 10);
-const priorityChecks = ["APC-1035", "APC-1039", "LSC-1013"].map((sku) => ({
+const traceSkus = (process.env.ESTOQUE_TRACE_SKUS ?? "").split(",").map((item) => item.trim()).filter(Boolean);
+const priorityChecks = traceSkus.map((sku) => ({
   sku,
   score: priorityTop10.find((row) => row.sku === sku)?.score ?? (() => {
     const row = data.skus.find((item) => item.sku === sku), stats = calendar.stats.get(sku);
@@ -361,7 +362,7 @@ console.log(JSON.stringify({
     q: policy.orderQuantity, fundedQ: policy.fundedQuantity, purchaseUnit: policy.purchaseUnit,
     unmetUnits: policy.projectedUnmetUnits,
   })),
-  selectedSkuDetails: [traceSku("APC-1011"), traceSku("APC-1005")],
+  selectedSkuDetails: traceSkus.map((sku) => traceSku(sku)),
   windowService: {
     budget1970000: { A: detailA1970.windows, B: detail1970.windows },
     budget5500000: { A: detailA5500.windows, B: detail5500.windows },

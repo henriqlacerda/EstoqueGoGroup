@@ -92,7 +92,11 @@ export default function ClientDashboard({ config }: { config: Phase3Config }) {
   ] : [], [report]);
   const activeExcessOfficial = report ? Object.values(report.endingInventoryByScenario.official)
     .reduce((sum, row) => sum + row.excess365Value, 0) : 0;
-  const rtu1083Coverage = report?.endingInventoryByScenario.official["RTU-1083"]?.endingCoverageDays ?? 0;
+  const officialEnding: Array<[string, EndingInventoryMetric]> = report ? Object.entries(report.endingInventoryByScenario.official) : [];
+  const topCoverage = officialEnding.reduce(
+    (best, [sku, row]) => (row.endingCoverageDays ?? 0) > best.days ? { sku, days: row.endingCoverageDays ?? 0 } : best,
+    { sku: "", days: 0 },
+  );
 
   const selectFile = (key: FileKey, file: File | null) => {
     setFiles((current) => ({ ...current, [key]: file }));
@@ -163,10 +167,11 @@ export default function ClientDashboard({ config }: { config: Phase3Config }) {
         }
         collected.push(...decisions);
         setAgentDecisions((current) => ({ ...current, ...Object.fromEntries(decisions.map((decision) => [decision.sku, decision])) }));
-        setAgentReceivedCount(collected.length);
+        setAgentReceivedCount(collected.filter((decision) => !decision.fallback).length);
       }
       setAgentPreview(collected);
-      setAgentStatus(`Respostas válidas: ${collected.length} de ${summary.length}.`);
+      const agentCount = collected.filter((decision) => !decision.fallback).length;
+      setAgentStatus(`Respostas do agente: ${agentCount} de ${summary.length}. Fallback determinístico: ${collected.length - agentCount}.`);
     } catch (reason) {
       setAgentStatus(reason instanceof Error ? reason.message : "Falha ao enviar os resumos.");
     } finally { setAgentBusy(false); }
@@ -204,7 +209,7 @@ export default function ClientDashboard({ config }: { config: Phase3Config }) {
               <article><b>Projeção do plano</b><span>98% é resultado do plano, não uma garantia de serviço.</span></article>
               <article><b>Recomendação depende dos parâmetros</b><span>R$ 5,0 mi usa T = 30 e SS = 98%. Com T = 0, o primeiro teto acima de 98% é R$ 5,25 mi.</span></article>
               <article><b>Excesso em ativos · {money(activeExcessOfficial)}</b><span>Valor no cenário oficial acima de 365 dias de cobertura.</span></article>
-              <article><b>RTU-1083 · {number(rtu1083Coverage)} dias</b><span>Cobertura muito alta; revisar cadastro e unidade de demanda.</span></article>
+              <article><b>Maior cobertura final · {topCoverage.sku || "—"} · {number(topCoverage.days)} dias</b><span>SKU com maior cobertura no cenário oficial; revisar cadastro e unidade de demanda.</span></article>
             </section>
 
             <section className="scenario-grid" aria-label="Cenário oficial e recomendado">
