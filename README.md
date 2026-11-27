@@ -30,3 +30,17 @@ As linhas repetidas de vendas com a mesma chave `(sku, data)` são somadas para 
 ## Aproximação de venda perdida
 
 A venda perdida é uma aproximação: conta dias da janela base com estoque final zero e histórico de venda, estima unidades perdidas pela média diária nos dias com estoque positivo (incluindo dias sem venda) e aplica o preço médio realizado. A projeção de serviço futura também é determinística e usa a demanda diária projetada.
+
+## Agente
+
+O agente recebe os resumos dos 30 SKUs mais críticos, em lotes de 10. Para cada SKU, o modelo (openai/gpt-oss-120b, via Groq) sugere uma ação entre comprar, manter, liquidar e revisar, com justificativa curta. Ele recebe a ação determinística como referência.
+
+A quantidade de compra vem da política determinística e não pode ser alterada pelo modelo. O servidor valida cada resposta:
+
+liquidação só para SKU descontinuado com preço final igual ou acima do custo;
+ativo com cobertura acima de 365 dias recebe revisar;
+resposta inválida, ou que viole essas regras, é substituída pela decisão determinística e marcada como fallback.
+
+Os motivos de revisar são marcados com o código da regra: [R1] cobertura final acima de 365 dias; [R2] sem venda na janela base; [R3] pedido calculado sem unidades financiadas; [R4] demanda não atendida sem pedido financiado.
+
+Limitação: não medimos com que frequência o modelo diverge da política determinística. Por isso, o agente explica e valida as decisões, mas não deve ser lido como fonte independente de decisão.

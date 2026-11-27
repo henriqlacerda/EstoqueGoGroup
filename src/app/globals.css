@@ -114,6 +114,40 @@ thead small { display: block; margin-top: 4px; color: #9aa69e; font-size: 8px; f
 .sanity-strip { display: flex; flex-wrap: wrap; gap: 9px 18px; margin-top: 13px; padding-top: 12px; border-top: 1px solid var(--line); color: #748077; font-size: 9px; }
 .sanity-strip b { color: #34463b; }
 .agent-status { margin: 9px 0 0; color: #65766b; font-size: 9px; }
+.upload-selected { border-style: solid; border-color: #9dc5a8; background: #f4faf5; }
+.upload-hint { margin: 10px 0 0; color: #7c6a3e; font-size: 10px; }
+.warning-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-top: 14px; }
+.warning-grid article { display: flex; min-height: 91px; flex-direction: column; gap: 7px; padding: 13px; border: 1px solid #eadfbe; border-radius: 8px; background: #fffcf4; }
+.warning-grid b { color: #765d2d; font-family: "Manrope", sans-serif; font-size: 10px; }
+.warning-grid span { color: #8c7b59; font-size: 9px; line-height: 1.5; }
+.scenario-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.scenario-card { padding: 18px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.scenario-card:nth-child(2) { border-color: #c9e2d0; background: #fbfefc; }
+.scenario-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 13px; border-bottom: 1px solid var(--line); }
+.scenario-card-heading .eyebrow { margin: 0 0 4px; }
+.scenario-card-heading h2 { font-size: 18px; }
+.scenario-chip { padding: 6px 8px; border-radius: 20px; background: var(--green-soft); color: var(--green-dark); font-size: 9px; font-weight: 700; white-space: nowrap; }
+.scenario-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px 12px; padding-top: 14px; }
+.scenario-stats div { display: flex; min-width: 0; flex-direction: column; gap: 4px; }
+.scenario-stats span { color: #7b887f; font-size: 9px; }
+.scenario-stats b { font-family: "Manrope", sans-serif; font-size: 14px; letter-spacing: -.3px; }
+.scenario-stats small { color: #9aa49e; font-size: 8px; }
+.recommended-row { background: #f1f8f3; }
+.sku-table-wrap { max-height: 680px; }
+.sku-table-wrap table { min-width: 1750px; }
+.justification-cell { max-width: 300px; overflow: hidden; text-overflow: ellipsis; }
+.decision-pill { display: inline-block; padding: 4px 7px; border-radius: 12px; font-size: 8px; font-weight: 700; }
+.decision-comprar { background: #e6f4eb; color: #236a45; }
+.decision-manter { background: #eef2ef; color: #66746a; }
+.decision-liquidar { background: #fff2dd; color: #8f5d12; }
+.decision-revisar { background: #fce9e5; color: #a0483b; }
+.decision-source { display: block; margin-top: 3px; color: #9a7a3b; font-size: 8px; }
+.agent-preview { margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--line); }
+.agent-preview h3 { margin-bottom: 10px; color: #536259; }
+.agent-preview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+.agent-preview-grid article { display: flex; flex-direction: column; gap: 7px; padding: 12px; border: 1px solid var(--line); border-radius: 7px; background: #fcfdfc; }
+.agent-preview-grid b { font-size: 9px; }
+.agent-preview-grid span { color: #78867e; font-size: 9px; line-height: 1.5; }
 
 @media (max-width: 1100px) {
   .content { padding-right: 26px; padding-left: 26px; }
@@ -138,6 +172,9 @@ thead small { display: block; margin-top: 4px; color: #9aa69e; font-size: 8px; f
   .panel-heading { align-items: flex-start; }
   .quality-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .upload-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .quality-bottom, .split-panel { grid-template-columns: 1fr; gap: 18px; }
+  .quality-bottom, .split-panel, .scenario-grid { grid-template-columns: 1fr; gap: 18px; }
+  .warning-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scenario-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .agent-preview-grid { grid-template-columns: 1fr; }
   .source-list { grid-template-columns: 1fr; }
 }

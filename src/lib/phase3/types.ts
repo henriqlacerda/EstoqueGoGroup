@@ -174,6 +174,13 @@ export interface ScenarioSummary {
   unfundedSkus: Array<{ sku: string; estimatedLostUnits: number; estimatedLostValue: number }>;
 }
 
+export interface EndingInventoryMetric {
+  endingStock: number;
+  endingCoverageDays: number | null;
+  excess365Units: number;
+  excess365Value: number;
+}
+
 export interface Phase3Report {
   referenceDate: string;
   quality: QualityReport;
@@ -181,6 +188,11 @@ export interface Phase3Report {
   scenarios: ScenarioSummary[];
   unboundedServiceScenarios: ScenarioSummary[];
   official: ScenarioSummary;
+  recommended: ScenarioSummary;
+  endingInventoryByScenario: {
+    official: Record<string, EndingInventoryMetric>;
+    recommended: Record<string, EndingInventoryMetric>;
+  };
   capitalIdle: number;
   monthlyHoldingCost: number;
   discontinuedLiquidations: SkuPolicy[];
